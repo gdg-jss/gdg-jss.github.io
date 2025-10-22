@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GDG on Campus JSSATEB - Under Maintenance</title>
+    <link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;700&family=Product+Sans&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Google Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            overflow: hidden;
+            color: #202124;
+            position: relative;
+        }
+
+        /* Animated background grid */
+        .background-grid {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(66, 133, 244, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(66, 133, 244, 0.03) 1px, transparent 1px);
+            background-size: 50px 50px;
+            animation: gridMove 20s linear infinite;
+        }
+
+        @keyframes gridMove {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(50px, 50px); }
+        }
+
+        .container {
+            background: #ffffff;
+            border-radius: 24px;
+            box-shadow: 
+                0 1px 2px 0 rgba(60, 64, 67, 0.3),
+                0 2px 6px 2px rgba(60, 64, 67, 0.15);
+            padding: 48px;
+            max-width: 480px;
+            width: 90%;
+            text-align: center;
+            position: relative;
+            z-index: 10;
+            animation: containerEntry 0.8s cubic-bezier(0.0, 0.0, 0.2, 1) forwards;
+            opacity: 0;
+            transform: translateY(20px) scale(0.95);
+        }
+
+        @keyframes containerEntry {
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        /* Google's 4-color spinner */
+        .google-spinner {
+            width: 64px;
+            height: 64px;
+            margin: 0 auto 32px;
+            position: relative;
+            animation: spinnerFadeIn 0.5s ease-out;
+        }
+
+        .spinner-blade {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            border: 3px solid transparent;
+            box-sizing: border-box;
+            animation: spinnerRotate 1.4s cubic-bezier(0.4, 0.0, 0.2, 1) infinite;
+        }
+
+        .spinner-blade::before {
+            content: '';
+            position: absolute;
+            top: -3px;
+            left: -3px;
+            right: -3px;
+            bottom: -3px;
+            border-radius: 50%;
+            border: 3px solid transparent;
+            border-top-color: #4285f4;
+            animation: spinnerColors 5.6s ease-in-out infinite;
+        }
+
+        @keyframes spinnerRotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(720deg); }
+        }
+
+        @keyframes spinnerColors {
+            0%, 100% { 
+                border-top-color: #4285f4;
+                border-right-color: transparent;
+                border-bottom-color: transparent;
+                border-left-color: transparent;
+            }
+            25% { 
+                border-top-color: #db4437;
+                border-right-color: #db4437;
+                border-bottom-color: transparent;
+                border-left-color: transparent;
+            }
+            50% { 
+                border-top-color: #f4b400;
+                border-right-color: #f4b400;
+                border-bottom-color: #f4b400;
+                border-left-color: transparent;
+            }
+            75% { 
+                border-top-color: #0f9d58;
+                border-right-color: #0f9d58;
+                border-bottom-color: #0f9d58;
+                border-left-color: #0f9d58;
+            }
+        }
+
+        @keyframes spinnerFadeIn {
+            from { 
+                opacity: 0;
+                transform: scale(0.8);
+            }
+            to { 
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        h1 {
+            font-size: 28px;
+            font-weight: 500;
+            margin-bottom: 12px;
+            color: #202124;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            animation: titleSlide 0.8s cubic-bezier(0.0, 0.0, 0.2, 1) 0.2s both;
+        }
+
+        @keyframes titleSlide {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .gdg-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 4px 12px;
+            background: linear-gradient(135deg, #4285f4 0%, #1a73e8 100%);
+            color: white;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 500;
+            margin-bottom: 24px;
+            animation: badgePulse 2s ease-in-out infinite;
+        }
+
+        @keyframes badgePulse {
+            0%, 100% { 
+                transform: scale(1);
+                box-shadow: 0 2px 4px rgba(66, 133, 244, 0.3);
+            }
+            50% { 
+                transform: scale(1.02);
+                box-shadow: 0 4px 8px rgba(66, 133, 244, 0.4);
+            }
+        }
+
+        .main-message {
+            font-size: 18px;
+            font-weight: 400;
+            color: #3c4043;
+            margin-bottom: 16px;
+            animation: messagesFade 0.8s cubic-bezier(0.0, 0.0, 0.2, 1) 0.4s both;
+        }
+
+        .sub-message {
+            font-size: 14px;
+            color: #5f6368;
+            line-height: 1.6;
+            margin-bottom: 32px;
+            animation: messagesFade 0.8s cubic-bezier(0.0, 0.0, 0.2, 1) 0.6s both;
+        }
+
+        @keyframes messagesFade {
+            from {
+                opacity: 0;
+                transform: translateY(8px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .progress-dots {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 24px;
+            animation: messagesFade 0.8s cubic-bezier(0.0, 0.0, 0.2, 1) 0.8s both;
+        }
+
+        .dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #dadce0;
+            animation: dotWave 1.4s ease-in-out infinite;
+        }
+
+        .dot:nth-child(1) {
+            animation-delay: 0s;
+            background: #4285f4;
+        }
+
+        .dot:nth-child(2) {
+            animation-delay: 0.2s;
+            background: #db4437;
+        }
+
+        .dot:nth-child(3) {
+            animation-delay: 0.4s;
+            background: #f4b400;
+        }
+
+        .dot:nth-child(4) {
+            animation-delay: 0.6s;
+            background: #0f9d58;
+        }
+
+        @keyframes dotWave {
+            0%, 80%, 100% {
+                transform: scale(1) translateY(0);
+                opacity: 1;
+            }
+            40% {
+                transform: scale(1.3) translateY(-8px);
+                opacity: 0.7;
+            }
+        }
+
+        /* Floating elements */
+        .floating-shapes {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .shape {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(40px);
+            opacity: 0;
+            animation: shapeFloat 15s ease-in-out infinite;
+        }
+
+        .shape1 {
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(66, 133, 244, 0.4) 0%, rgba(66, 133, 244, 0) 70%);
+            top: -150px;
+            left: -150px;
+            animation-delay: 0s;
+        }
+
+        .shape2 {
+            width: 250px;
+            height: 250px;
+            background: radial-gradient(circle, rgba(219, 68, 55, 0.4) 0%, rgba(219, 68, 55, 0) 70%);
+            bottom: -125px;
+            right: -125px;
+            animation-delay: 3s;
+        }
+
+        .shape3 {
+            width: 200px;
+            height: 200px;
+            background: radial-gradient(circle, rgba(244, 180, 0, 0.4) 0%, rgba(244, 180, 0, 0) 70%);
+            top: 50%;
+            left: -100px;
+            animation-delay: 6s;
+        }
+
+        .shape4 {
+            width: 280px;
+            height: 280px;
+            background: radial-gradient(circle, rgba(15, 157, 88, 0.4) 0%, rgba(15, 157, 88, 0) 70%);
+            top: 20%;
+            right: -140px;
+            animation-delay: 9s;
+        }
+
+        @keyframes shapeFloat {
+            0%, 100% {
+                opacity: 0;
+                transform: translate(0, 0) scale(0.8);
+            }
+            20% {
+                opacity: 0.15;
+                transform: translate(30px, -30px) scale(1);
+            }
+            40% {
+                opacity: 0.2;
+                transform: translate(-20px, 20px) scale(1.1);
+            }
+            60% {
+                opacity: 0.15;
+                transform: translate(40px, 10px) scale(0.95);
+            }
+            80% {
+                opacity: 0.1;
+                transform: translate(-10px, -40px) scale(0.9);
+            }
+        }
+
+        /* Responsive design */
+        @media (max-width: 480px) {
+            .container {
+                padding: 32px 24px;
+                border-radius: 16px;
+            }
+
+            h1 {
+                font-size: 24px;
+            }
+
+            .main-message {
+                font-size: 16px;
+            }
+
+            .sub-message {
+                font-size: 13px;
+            }
+        }
+
+        /* Hover effect for container */
+        .container:hover {
+            box-shadow: 
+                0 1px 3px 0 rgba(60, 64, 67, 0.3),
+                0 4px 8px 3px rgba(60, 64, 67, 0.15);
+            transition: box-shadow 0.3s cubic-bezier(0.4, 0.0, 0.2, 1);
+        }
+    </style>
+</head>
+<body>
+    <div class="background-grid"></div>
+    
+    <div class="floating-shapes">
+        <div class="shape shape1"></div>
+        <div class="shape shape2"></div>
+        <div class="shape shape3"></div>
+        <div class="shape shape4"></div>
+    </div>
+
+    <div class="container">
+        <div class="google-spinner">
+            <div class="spinner-blade"></div>
+        </div>
+        
+        <h1>GDG on Campus JSSATEB</h1>
+        
+        <div class="gdg-badge">
+            <span class="material-icons-outlined" style="font-size: 16px;"></span>
+            Estimated Time: A few minutes
+        </div>
+        
+        <p class="main-message">Our website is currently under maintenance</p>
+        
+        <p class="sub-message">
+            We're building something amazing. 
+            Our team is working hard to bring you an enhanced experience. 
+            Check back soon!
+        </p>
+        
+        <div class="progress-dots">
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+        </div>
+    </div>
+</body>
+</html>
